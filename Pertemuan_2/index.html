@@ -10,7 +10,7 @@
 <body>
     <div id="app">
         <p v-for="text in listText">{{ text.text }}</p>
-        <input type="text" v-model:value='inputText'/> <button v-on:click="tambahkan">Tambahkan</button>
+        <input type="text" v-model:value='inputText'@keyup.enter="tambahkan"/> <button v-on:click="tambahkan">Tambahkan</button>
         <p>{{ todoMore }}</p>
     </div>
 
@@ -20,21 +20,24 @@
             data: {
                 inputText: '',
                 listText: [{
-                    no:0,
                     text:''
                  }],
                  todoMore:''
             },
             methods:{
                 tambahkan(){
-                    this.listText.push({
-                        text:this.inputText,
-                    })
-                    if(this.listText.length > 4)
-                    {
-                        this.todoMore = 'Hebat!';
+                    if(this.inputText == ''){
+                    alert('Silahkan isi terlebih dahulu')
+                    }else{
+                        this.listText.push({
+                            text:this.inputText,
+                        })
+                        if(this.listText.length > 4)
+                        {
+                            this.todoMore = 'Hebat!';
+                        }
+                        this.inputText = '';
                     }
-                    this.inputText = '';
                 }
             }
         });
